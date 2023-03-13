@@ -6,10 +6,11 @@ const initialState = {
   isError: false,
   jobs: [],
   error: '',
+  editing: {},
 };
 
 // async thunk
-const fetchJobs = createAsyncThunk('jobs/fetchJobs', async () => {
+export const fetchJobs = createAsyncThunk('jobs/fetchJobs', async () => {
   const jobs = await getJobs();
   return jobs;
 })

@@ -1,4 +1,5 @@
-export default function Job() {
+export default function Job({ job }) {
+  const { } = job || {};
   return (
     <div className="lws-single-job">
       <div className="flex-1 min-w-0">

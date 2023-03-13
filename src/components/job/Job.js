@@ -1,4 +1,4 @@
-import { deleteJob, formEditActive, removeAJob } from "../../features/jobs/jobsSlice";
+import { removeAJob } from "../../features/jobs/jobsSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -9,13 +9,13 @@ export default function Job({ job }) {
   // edit data
   const handleEdit = () => {
     navigate(`/edit-job/${id}`);
-    dispatch(formEditActive(job));
+    // dispatch(formEditActive(job));
   };
 
   // delete a job
   const handleDelete = (id) => {
     dispatch(removeAJob(id));
-  }
+  };
 
   return (
     <div className="lws-single-job">

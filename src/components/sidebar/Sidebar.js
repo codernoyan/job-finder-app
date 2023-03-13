@@ -1,16 +1,12 @@
-import { formEditInactive } from "../../features/jobs/jobsSlice";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleNavigate = (e) => {
     e.preventDefault();
     navigate('/add-new-job');
-    dispatch(formEditInactive());
   }
   return (
     <div className="sidebar">

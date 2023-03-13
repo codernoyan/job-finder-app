@@ -6,7 +6,7 @@ export default function Sidebar() {
       <nav>
         <ul className="space-y-4">
           <li>
-            <Link to="/jobs" className="main-menu menu-active" id="lws-alljobs-menu">
+            <Link to="/" className="main-menu menu-active" id="lws-alljobs-menu">
               <i className="fa-solid fa-briefcase" />
               <span> All Available Jobs</span>
             </Link>

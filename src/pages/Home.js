@@ -1,6 +1,5 @@
 import Header from "../components/header/Header";
 import JobsList from "../components/jobsList/JobsList";
-// import Sidebar from "../components/sidebar/Sidebar";
 
 export default function Home() {
   return (

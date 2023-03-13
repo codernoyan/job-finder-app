@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import AddNewJob from "../components/addNewJob/AddNewJob";
 import Layout from "../Layout/Layout";
+import AddNewJob from "../pages/AddNewJob";
+import EditJob from "../pages/EditJob";
 import Home from "../pages/Home";
 
 export const router = createBrowserRouter([
@@ -9,13 +10,17 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/jobs',
+        path: '/',
         element: <Home />
       },
       {
         path: '/add-new-job',
         element: <AddNewJob />
       },
+      {
+        path: '/edit-job',
+        element: <EditJob />
+      }
     ]
   }
 ]);

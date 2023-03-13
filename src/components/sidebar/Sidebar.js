@@ -6,10 +6,10 @@ export default function Sidebar() {
       <nav>
         <ul className="space-y-4">
           <li>
-            <a href="/jobs" className="main-menu menu-active" id="lws-alljobs-menu">
+            <Link to="/jobs" className="main-menu menu-active" id="lws-alljobs-menu">
               <i className="fa-solid fa-briefcase" />
               <span> All Available Jobs</span>
-            </a>
+            </Link>
             <ul className="space-y-6 lg:space-y-2 ">
               <li>
                 <a className="sub-menu" href="/jobs/internship" id="lws-internship-menu">
@@ -32,7 +32,7 @@ export default function Sidebar() {
             </ul>
           </li>
           <li>
-            <Link to="/jobs" className="main-menu" id="lws-addJob-menu">
+            <Link to="/add-new-job" className="main-menu" id="lws-addJob-menu">
               <i className="fa-solid fa-file-circle-plus" />
               <span>Add NewJob</span>
             </Link>

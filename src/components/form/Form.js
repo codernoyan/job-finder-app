@@ -1,8 +1,12 @@
+import { addAJob, updateAJob } from "../../features/jobs/jobsSlice";
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   const { editing } = useSelector((state) => state.jobs);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // console.log(deadline)
   const [input, setInput] = useState({
     title: '',
@@ -20,7 +24,7 @@ export default function Form() {
       setInput({
         title,
         type,
-        salary,
+        salary: Number(salary),
         deadline,
       });
     } else {
@@ -28,14 +32,21 @@ export default function Form() {
     }
   }, [editing])
 
+  // add form
   const handleAddJob = (e) => {
     e.preventDefault();
+    dispatch(addAJob(input))
+    navigate('/')
     console.log(input);
     reset();
   };
 
+  // edit form
   const handleEditForm = (e) => {
+    const { id } = editing || {};
     e.preventDefault();
+    dispatch(updateAJob({ id, jobData: input }))
+    navigate('/')
     console.log(input);
     reset();
     setEditMode(false);

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addJobToDB, getJobs } from "./jobsAPI";
+import { addJobToDB, getJobs, deleteJobFromDB, updateJobToDB } from "./jobsAPI";
 
 const initialState = {
   isLoading: false,
@@ -21,12 +21,12 @@ export const addAJob = createAsyncThunk('jobs/addAJob', async (jobData) => {
 });
 
 export const updateAJob = createAsyncThunk('jobs/updateAJob', async ({ id, jobData }) => {
-  const job = await addJobToDB(id, jobData);
+  const job = await updateJobToDB(id, jobData);
   return job;
 });
 
 export const removeAJob = createAsyncThunk('jobs/removeAJob', async (id) => {
-  const job = await addJobToDB(id);
+  const job = await deleteJobFromDB(id);
   return job;
 });
 
@@ -39,7 +39,7 @@ const jobsSlice = createSlice({
       state.jobs = action.payload;
     },
     deleteJob: (state, action) => {
-      state.filter((job) => job.id !== action.payload);
+      state.jobs.filter((job) => job.id !== action.payload);
     },
     formEditActive: (state, action) => {
       state.editing = action.payload;
@@ -62,6 +62,25 @@ const jobsSlice = createSlice({
         state.error = '';
       })
       .addCase(fetchJobs.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.error?.message;
+        state.jobs = [];
+      })
+
+      // delete
+      .addCase(removeAJob.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = '';
+      })
+      .addCase(removeAJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.jobs = state.jobs.filter((job) => job.id !== action.meta.arg);
+        state.error = '';
+      })
+      .addCase(removeAJob.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.error = action.error?.message;

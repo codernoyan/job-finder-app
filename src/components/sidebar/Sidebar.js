@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+import { formEditInactive } from "../../features/jobs/jobsSlice";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleNavigate = (e) => {
+    e.preventDefault();
+    navigate('/add-new-job');
+    dispatch(formEditInactive());
+  }
   return (
     <div className="sidebar">
       <nav>
@@ -32,10 +43,10 @@ export default function Sidebar() {
             </ul>
           </li>
           <li>
-            <Link to="/add-new-job" className="main-menu" id="lws-addJob-menu">
+            <a onClick={handleNavigate} href="/" className="main-menu" id="lws-addJob-menu">
               <i className="fa-solid fa-file-circle-plus" />
               <span>Add NewJob</span>
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>

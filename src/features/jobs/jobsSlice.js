@@ -41,6 +41,12 @@ const jobsSlice = createSlice({
     deleteJob: (state, action) => {
       state.filter((job) => job.id !== action.payload);
     },
+    formEditActive: (state, action) => {
+      state.editing = action.payload;
+    },
+    formEditInactive: (state) => {
+      state.editing = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -65,3 +71,4 @@ const jobsSlice = createSlice({
 });
 
 export default jobsSlice.reducer;
+export const { addJob, deleteJob, formEditActive, formEditInactive } = jobsSlice.actions;

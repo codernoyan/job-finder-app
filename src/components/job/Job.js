@@ -1,5 +1,17 @@
+import { formEditActive } from "../../features/jobs/jobsSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 export default function Job({ job }) {
+  const dispatch = useDispatch();
   const { id, title, type, salary, deadline } = job || {};
+  const navigate = useNavigate();
+  // edit data
+  const handleEdit = () => {
+    navigate(`/edit-job/${id}`);
+    dispatch(formEditActive(job));
+  };
+
   return (
     <div className="lws-single-job">
       <div className="flex-1 min-w-0">
@@ -24,7 +36,7 @@ export default function Job({ job }) {
       </div>
       <div className="mt-5 flex lg:mt-0 lg:ml-4">
         <span className="hidden sm:block">
-          <button type="button" className="lws-edit btn btn-primary">
+          <button onClick={handleEdit} type="button" className="lws-edit btn btn-primary">
             <i className="fa-solid fa-pen text-gray-300 -ml-1 mr-2" />
             Edit
           </button>
@@ -38,4 +50,4 @@ export default function Job({ job }) {
       </div>
     </div>
   )
-}
+};

@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         element: <AddNewJob />
       },
       {
-        path: '/edit-job',
+        path: '/edit-job/:jobId',
         element: <EditJob />
       }
     ]

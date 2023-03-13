@@ -20,7 +20,7 @@ export const addAJob = createAsyncThunk('jobs/addAJob', async (jobData) => {
   return job;
 });
 
-export const updateAJob = createAsyncThunk('jobs/updateAJob', async ({id, jobData}) => {
+export const updateAJob = createAsyncThunk('jobs/updateAJob', async ({ id, jobData }) => {
   const job = await addJobToDB(id, jobData);
   return job;
 });
@@ -30,7 +30,6 @@ export const removeAJob = createAsyncThunk('jobs/removeAJob', async (id) => {
   return job;
 });
 
-
 // create slice
 const jobsSlice = createSlice({
   name: 'jobs',
@@ -39,8 +38,9 @@ const jobsSlice = createSlice({
     addJob: (state, action) => {
       state.jobs = action.payload;
     },
-    
-
+    deleteJob: (state, action) => {
+      state.filter((job) => job.id !== action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,6 +59,7 @@ const jobsSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.error = action.error?.message;
+        state.jobs = [];
       })
   }
 });

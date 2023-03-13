@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Sidebar() {
   return (
     <div className="sidebar">
@@ -30,10 +32,10 @@ export default function Sidebar() {
             </ul>
           </li>
           <li>
-            <a href="/jobs" className="main-menu" id="lws-addJob-menu">
+            <Link to="/jobs" className="main-menu" id="lws-addJob-menu">
               <i className="fa-solid fa-file-circle-plus" />
               <span>Add NewJob</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

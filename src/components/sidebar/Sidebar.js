@@ -14,7 +14,7 @@ export default function Sidebar() {
 
   const handleFilterAll = (e, type) => {
     e.preventDefault();
-    dispatch(filterData(type))
+    dispatch(filterData(type));
     navigate('/');
   };
 

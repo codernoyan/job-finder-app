@@ -35,6 +35,19 @@ export default function JobsList() {
       return true;
     }
     return false;
+  };
+
+  const sortBySalaryRange = (a, b) => {
+    switch (sortTitle) {
+      case 'low_to_high':
+        return Number(a.salary) - Number(b.salary);
+      case 'high_to_low':
+        return Number(b.salary) - Number(a.salary);
+      case '':
+        return true;
+      default:
+        return true;
+    }
   }
 
 
@@ -62,7 +75,7 @@ export default function JobsList() {
   };
 
   if (!isLoading && !isError && jobs?.length > 0) {
-    content = jobs.filter(filterByJobTitle).filter(filterByName).map((job) => <Job key={job.id} job={job} />)
+    content = jobs.filter(filterByJobTitle).filter(filterByName).sort(sortBySalaryRange).map((job) => <Job key={job.id} job={job} />)
   }
 
   return (

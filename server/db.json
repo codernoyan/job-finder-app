@@ -76,20 +76,6 @@
       "salary": 215606,
       "deadline": "2023-04-01",
       "id": 12
-    },
-    {
-      "title": "Full Stack Developer",
-      "type": "Internship",
-      "salary": 6500,
-      "deadline": "2023-03-30",
-      "id": 13
-    },
-    {
-      "title": "MERN Stack Developer",
-      "type": "Remote",
-      "salary": 45554,
-      "deadline": "2023-03-24",
-      "id": 14
     }
   ]
 }

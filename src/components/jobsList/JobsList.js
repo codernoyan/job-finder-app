@@ -51,8 +51,7 @@ export default function JobsList() {
         return true;
     }
   }
-
-  // render with condition
+  // lets decide what will render
   let content;
 
   if (isLoading) content = <Loading />

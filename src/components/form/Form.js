@@ -1,7 +1,8 @@
-import { addAJob, updateAJob } from "../../features/jobs/jobsSlice";
+import { addAJob } from "../../features/jobs/jobsSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { updateAJob } from "../../features/job/jobSlice";
 
 export default function Form({ editJobData }) {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export default function Form({ editJobData }) {
     deadline: '',
   });
 
+  // get job data if need to be updated with the same form
   useEffect(() => {
     const { id, title, type, salary, deadline } = editJobData || {};
     if (id) {
@@ -28,6 +30,7 @@ export default function Form({ editJobData }) {
     }
   }, [editJobData])
 
+  // add a job
   const handleAddJob = (e) => {
     e.preventDefault();
     dispatch(addAJob(input))
@@ -36,6 +39,7 @@ export default function Form({ editJobData }) {
     reset();
   };
 
+  // edit a job
   const handleEditJob = (e) => {
     e.preventDefault();
     dispatch(updateAJob({ id: input?.id, jobData: input }))
@@ -44,6 +48,7 @@ export default function Form({ editJobData }) {
     reset();
   }
 
+  // reset data from form
   const reset = () => {
     setInput({
       title: '',
@@ -54,7 +59,6 @@ export default function Form({ editJobData }) {
   };
 
   return (
-
     <form onSubmit={editJobData?.id ? handleEditJob : handleAddJob} className="space-y-6">
       <div className="fieldContainer">
         <label htmlFor="lws-JobTitle" className="text-sm font-medium text-slate-300">Job Title</label>

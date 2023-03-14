@@ -8,12 +8,13 @@ const initialState = {
   error: '',
 };
 
-// async thunk
+// fetch all jobs
 export const fetchJob = createAsyncThunk('jobs/fetchJob', async (id) => {
   const job = await getJob(id);
   return job;
 });
 
+// update a job
 export const updateAJob = createAsyncThunk('jobs/updateAJob', async ({ id, jobData }) => {
   const job = await updateJobToDB(id, jobData);
   return job;

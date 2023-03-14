@@ -52,7 +52,6 @@ export default function JobsList() {
     }
   }
 
-
   // render with condition
   let content;
 
@@ -61,7 +60,9 @@ export default function JobsList() {
   if (!isLoading && isError) {
     content = (
       <div>
-        <h2>{error}</h2>
+        <h2 style={{
+          color: 'white',
+        }}>{error}</h2>
       </div>
     )
   };

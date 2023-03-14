@@ -44,22 +44,22 @@
     },
     {
       "title": "Software Developer",
-      "type": "Full Time",
+      "type": "Remote",
       "salary": 69000,
       "deadline": "2023-03-29",
       "id": 8
     },
     {
       "title": "IOS App Developer",
-      "type": "Remote",
+      "type": "Full Time",
       "salary": 65000,
       "deadline": "2023-03-14",
       "id": 9
     },
     {
-      "title": "MERN Stack Developer",
+      "title": "Product Manager",
       "type": "Internship",
-      "salary": 55000,
+      "salary": 56000,
       "deadline": "2023-04-08",
       "id": 10
     },
@@ -69,13 +69,6 @@
       "salary": 75000,
       "deadline": "2023-03-31",
       "id": 11
-    },
-    {
-      "title": "Frontend Engineer",
-      "type": "Remote",
-      "salary": 215606,
-      "deadline": "2023-04-01",
-      "id": 12
     }
   ]
 }

@@ -1,12 +1,24 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Form from "../components/form/Form";
+import { fetchJob } from "../features/job/jobSlice";
 
 export default function EditJob() {
+  const { job } = useSelector((state) => state.job);
+  const dispatch = useDispatch();
+  const { jobId: id } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchJob(id))
+  }, [dispatch, id])
+
   return (
     <div className="lg:pl-[14rem] mt-[5.8125rem]">
-      {/* <main className="max-w-3xl rounded-lg mx-auto relative z-20 p-10 xl:max-w-none bg-[#1E293B]">
+      <main className="max-w-3xl rounded-lg mx-auto relative z-20 p-10 xl:max-w-none bg-[#1E293B]">
         <h1 className="mb-10 text-center lws-section-title">Edit Job</h1>
         <div className="max-w-3xl mx-auto">
-          <form className="space-y-6">
+          {/* <form className="space-y-6">
             <div className="fieldContainer">
               <label htmlFor="lws-JobTitle" className="text-sm font-medium text-slate-300">Job Title</label>
               <select id="lws-JobTitle" name="lwsJobTitle" required>
@@ -52,10 +64,10 @@ export default function EditJob() {
                 Edit
               </button>
             </div>
-          </form>
+          </form> */}
+          <Form editJobData={job} />
         </div>
-      </main> */}
-      <Form editMode={true} />
+      </main>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { filterData } from "../../features/filters/filtersSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { emptyJob } from "../../features/job/jobSlice";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -15,6 +16,11 @@ export default function Sidebar() {
     e.preventDefault();
     dispatch(filterData(type))
     navigate('/');
+  };
+
+  const handleNavigateToAddJob = () => {
+    dispatch(emptyJob());
+    navigate('/add-new-job');
   }
 
   return (
@@ -48,7 +54,7 @@ export default function Sidebar() {
             </ul>
           </li>
           <li>
-            <Link to="/add-new-job" className="main-menu" id="lws-addJob-menu">
+            <Link to="/add-new-job" onClick={handleNavigateToAddJob} className="main-menu" id="lws-addJob-menu">
               <i className="fa-solid fa-file-circle-plus" />
               <span>Add NewJob</span>
             </Link>

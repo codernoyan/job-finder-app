@@ -1,36 +1,33 @@
 import { addAJob, updateAJob } from "../../features/jobs/jobsSlice";
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export default function Form() {
+export default function Form({ editJobData }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(deadline)
   const [input, setInput] = useState({
     title: '',
     type: '',
     salary: '',
     deadline: '',
   });
-  // edit form toggle
-  // useEffect(() => {
-  //   const { id, title, type, deadline, salary } = editing || {};
-  //   console.log(deadline)
-  //   if (id) {
-  //     setEditMode(true);
-  //     setInput({
-  //       title,
-  //       type,
-  //       salary: Number(salary),
-  //       deadline,
-  //     });
-  //   } else {
-  //     reset();
-  //   }
-  // }, [editing])
 
-  // add form
+  useEffect(() => {
+    const { id, title, type, salary, deadline } = editJobData || {};
+    if (id) {
+      setInput({
+        id,
+        title,
+        type,
+        salary: Number(salary),
+        deadline
+      })
+    } else {
+      reset();
+    }
+  }, [editJobData])
+
   const handleAddJob = (e) => {
     e.preventDefault();
     dispatch(addAJob(input))
@@ -39,16 +36,13 @@ export default function Form() {
     reset();
   };
 
-  // edit form
-  // const handleEditForm = (e) => {
-  //   const { id } = editing || {};
-  //   e.preventDefault();
-  //   dispatch(updateAJob({ id, jobData: input }))
-  //   navigate('/')
-  //   console.log(input);
-  //   reset();
-  //   setEditMode(false);
-  // };
+  const handleEditJob = (e) => {
+    e.preventDefault();
+    dispatch(updateAJob({ id: input?.id, jobData: input }))
+    navigate('/')
+    console.log(input);
+    reset();
+  }
 
   const reset = () => {
     setInput({
@@ -60,7 +54,8 @@ export default function Form() {
   };
 
   return (
-    <form onSubmit={handleAddJob} className="space-y-6">
+
+    <form onSubmit={editJobData?.id ? handleEditJob : handleAddJob} className="space-y-6">
       <div className="fieldContainer">
         <label htmlFor="lws-JobTitle" className="text-sm font-medium text-slate-300">Job Title</label>
         <select onChange={(e) => setInput({ ...input, title: e.target.value })} id="lws-JobTitle" name="lwsJobTitle" required value={input.title}>
@@ -103,7 +98,9 @@ export default function Form() {
       </div>
       <div className="text-right">
         <button type="submit" id="lws-submit" className="cursor-pointer btn btn-primary w-fit">
-          Add Job
+          {
+            editJobData?.id ? 'Update' : 'Save'
+          }
         </button>
       </div>
     </form>

@@ -28,8 +28,9 @@ export default function JobsList() {
     }
   };
 
-  const filterByName = (job) => {
-    if (job.title.toLowerCase().indexOf(searchTitle.toLowerCase()) === 0) {
+  // filter by job title
+  const filterByTitle = (job) => {
+    if (job.title.toLowerCase().indexOf(searchTitle.toLowerCase()) !== -1) {
       return true;
     } else if (searchTitle === '') {
       return true;
@@ -37,6 +38,7 @@ export default function JobsList() {
     return false;
   };
 
+  // sort jobs by salary range
   const sortBySalaryRange = (a, b) => {
     switch (sortTitle) {
       case 'low_to_high':
@@ -75,7 +77,7 @@ export default function JobsList() {
   };
 
   if (!isLoading && !isError && jobs?.length > 0) {
-    content = jobs.filter(filterByJobTitle).filter(filterByName).sort(sortBySalaryRange).map((job) => <Job key={job.id} job={job} />)
+    content = jobs.filter(filterByJobTitle).filter(filterByTitle).sort(sortBySalaryRange).map((job) => <Job key={job.id} job={job} />)
   }
 
   return (

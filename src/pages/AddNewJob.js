@@ -1,41 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addAJob } from "../features/jobs/jobsSlice";
+import Form from "../components/form/Form";
 
 export default function AddNewJob() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [input, setInput] = useState({
-    title: '',
-    type: '',
-    salary: '',
-    deadline: '',
-  });
-
-  const handleAddJob = (e) => {
-    e.preventDefault();
-    dispatch(addAJob(input))
-    navigate('/')
-    console.log(input);
-    reset();
-  };
-
-  const reset = () => {
-    setInput({
-      title: '',
-      type: '',
-      salary: '',
-      deadline: '',
-    })
-  };
 
   return (
     <div className="lg:pl-[14rem] mt-[5.8125rem]">
       <main className="max-w-3xl rounded-lg mx-auto relative z-20 p-10 xl:max-w-none bg-[#1E293B]">
         <h1 className="mb-10 text-center lws-section-title">Add New Job</h1>
         <div className="max-w-3xl mx-auto">
-          <form onSubmit={handleAddJob} className="space-y-6">
+          {/* <form onSubmit={handleAddJob} className="space-y-6">
             <div className="fieldContainer">
               <label htmlFor="lws-JobTitle" className="text-sm font-medium text-slate-300">Job Title</label>
               <select onChange={(e) => setInput({ ...input, title: e.target.value })} id="lws-JobTitle" name="lwsJobTitle" required value={input.title}>
@@ -81,7 +53,8 @@ export default function AddNewJob() {
                 Add Job
               </button>
             </div>
-          </form>
+          </form> */}
+          <Form />
         </div>
       </main>
     </div>

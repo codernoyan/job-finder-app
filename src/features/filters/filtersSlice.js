@@ -14,10 +14,10 @@ const filtersSlice = createSlice({
       state.sortTitle = action.payload;
     },
     filterData: (state, action) => {
-      state.sortTitle = action.payload;
+      state.filterTitle = action.payload;
     },
     searchData: (state, action) => {
-      state.sortTitle = action.payload;
+      state.searchTitle = action.payload;
     },
   },
 });

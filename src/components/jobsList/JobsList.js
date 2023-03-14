@@ -6,6 +6,7 @@ import Loading from "../ui/Loading";
 
 export default function JobsList() {
   const { isLoading, isError, jobs, error } = useSelector((state) => state.jobs);
+  const { filterTitle, sortTitle, searchTitle } = useSelector((state) => state.filters);
   const dispatch = useDispatch();
 
   // fetch jobs
@@ -13,6 +14,31 @@ export default function JobsList() {
     dispatch(fetchJobs())
   }, [dispatch]);
 
+  const filterByJobTitle = (job) => {
+    // console.log(filterTitle)
+    switch (filterTitle) {
+      case 'internship':
+        return job.type === 'Internship';
+      case 'fullTime':
+        return job.type === 'Full Time';
+      case 'remote':
+        return job.type === 'Remote';
+      default:
+        return true;
+    }
+  };
+
+  const filterByName = (job) => {
+    if (job.title.toLowerCase().indexOf(searchTitle.toLowerCase()) === 0) {
+      return true;
+    } else if (searchTitle === '') {
+      return true;
+    }
+    return false;
+  }
+
+
+  // render with condition
   let content;
 
   if (isLoading) content = <Loading />
@@ -36,7 +62,7 @@ export default function JobsList() {
   };
 
   if (!isLoading && !isError && jobs?.length > 0) {
-    content = jobs?.map((job) => <Job key={job.id} job={job} />)
+    content = jobs.filter(filterByJobTitle).filter(filterByName).map((job) => <Job key={job.id} job={job} />)
   }
 
   return (

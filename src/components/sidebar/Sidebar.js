@@ -1,37 +1,46 @@
+import { filterData } from "../../features/filters/filtersSlice";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleNavigate = (e) => {
+  const handleFilter = (e, type) => {
     e.preventDefault();
-    navigate('/add-new-job');
+    dispatch(filterData(type));
+  };
+
+  const handleFilterAll = (e, type) => {
+    e.preventDefault();
+    dispatch(filterData(type))
+    navigate('/');
   }
+
   return (
     <div className="sidebar">
       <nav>
         <ul className="space-y-4">
           <li>
-            <Link to="/" className="main-menu menu-active" id="lws-alljobs-menu">
+            <Link to="/" onClick={(e) => handleFilterAll(e, '')} className="main-menu menu-active" id="lws-alljobs-menu">
               <i className="fa-solid fa-briefcase" />
               <span> All Available Jobs</span>
             </Link>
             <ul className="space-y-6 lg:space-y-2 ">
               <li>
-                <a className="sub-menu" href="/jobs/internship" id="lws-internship-menu">
+                <a onClick={(e) => handleFilter(e, 'internship')} className="sub-menu" href="/jobs/internship" id="lws-internship-menu">
                   <i className="fa-solid fa-stop !text-[#FF5757]" />
                   Internship
                 </a>
               </li>
               <li>
-                <a className="sub-menu" href="/jobs/fulltime" id="lws-fulltime-menu">
+                <a onClick={(e) => handleFilter(e, 'fullTime')} className="sub-menu" href="/jobs/fulltime" id="lws-fulltime-menu">
                   <i className="fa-solid fa-stop !text-[#FF8A00]" />
                   Full Time
                 </a>
               </li>
               <li>
-                <a className="sub-menu" href="/jobs/remote" id="lws-remote-menu">
+                <a onClick={(e) => handleFilter(e, 'remote')} className="sub-menu" href="/jobs/remote" id="lws-remote-menu">
                   <i className="fa-solid fa-stop !text-[#56E5C4]" />
                   Remote
                 </a>
@@ -39,10 +48,10 @@ export default function Sidebar() {
             </ul>
           </li>
           <li>
-            <a onClick={handleNavigate} href="/" className="main-menu" id="lws-addJob-menu">
+            <Link to="/add-new-job" className="main-menu" id="lws-addJob-menu">
               <i className="fa-solid fa-file-circle-plus" />
               <span>Add NewJob</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

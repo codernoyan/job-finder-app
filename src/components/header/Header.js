@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <div className="md:flex space-y-2 md:space-y-0 justify-between mb-10 ">
-      <h1 className="lws-section-title">All {filterTitle === 'internship' ? 'Internship' : filterTitle === 'fullTime' ? 'Full Time' : filterTitle === 'remote' ? 'Remote' : 'Available'} Jobs</h1>
+      <h1 className="lws-section-title">{filterTitle === 'internship' ? 'Available Internship' : filterTitle === 'fullTime' ? 'Available Full Time' : filterTitle === 'remote' ? 'Available Remote' : 'All Available'} Jobs</h1>
       <div className="flex gap-4">
         <div className="search-field group flex-1">
           <i className="fa-solid fa-magnifying-glass search-icon group-focus-within:text-blue-500" />

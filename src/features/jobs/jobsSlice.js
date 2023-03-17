@@ -28,11 +28,11 @@ export const removeAJob = createAsyncThunk('jobs/removeAJob', async (id) => {
 const jobsSlice = createSlice({
   name: 'jobs',
   initialState,
-  reducers: {
-    addJob: (state, action) => {
-      state.jobs.push(action.payload);
-    },
-  },
+  // reducers: {
+  //   addJob: (state, action) => {
+  //     state.jobs.push(action.payload);
+  //   },
+  // },
   extraReducers: (builder) => {
     builder
       .addCase(fetchJobs.pending, (state, action) => {
@@ -51,6 +51,23 @@ const jobsSlice = createSlice({
         state.isError = true;
         state.error = action.error?.message;
         state.jobs = [];
+      })
+
+      // add a job
+      .addCase(addAJob.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = '';
+      })
+      .addCase(addAJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.jobs.push(action.payload.data);
+      })
+      .addCase(addAJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.error = action.error?.message;
       })
 
       // delete
@@ -75,4 +92,4 @@ const jobsSlice = createSlice({
 });
 
 export default jobsSlice.reducer;
-export const { addJob } = jobsSlice.actions;
+// export const { addJob } = jobsSlice.actions;

@@ -1,4 +1,4 @@
-import { addAJob, addJob } from "../../features/jobs/jobsSlice";
+import { addAJob } from "../../features/jobs/jobsSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -34,10 +34,10 @@ export default function Form({ editJobData }) {
   const handleAddJob = (e) => {
     e.preventDefault();
     dispatch(addAJob(input))
-      .then((info) => {
-        dispatch(addJob(info.payload.data))
-        // console.log(info.payload.data);
-      });
+      // .then((info) => {
+      //   dispatch(addJob(info.payload.data))
+      //   // console.log(info.payload.data);
+      // });
     // navigate('/');
     console.log(input);
     reset();

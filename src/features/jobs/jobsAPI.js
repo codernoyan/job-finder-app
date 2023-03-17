@@ -9,7 +9,13 @@ export const getJobs = async () => {
 // add a job to database
 export const addJobToDB = async (jobData) => {
   const response = await axios.post('/jobs', jobData);
-  return response;
+  return response.data;
+};
+
+// update a specific job to database
+export const updateJobToDB = async (id, jobData) => {
+  const response = await axios.patch(`/jobs/${id}`, jobData);
+  return response.data;
 };
 
 // delete a job from database

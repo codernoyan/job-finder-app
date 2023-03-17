@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addJobToDB, getJobs, deleteJobFromDB } from "./jobsAPI";
+import { addJobToDB, getJobs, deleteJobFromDB, updateJobToDB } from "./jobsAPI";
 
 const initialState = {
   isLoading: false,
@@ -14,11 +14,19 @@ export const fetchJobs = createAsyncThunk('jobs/fetchJobs', async () => {
   return jobs;
 });
 
+// create a job
 export const addAJob = createAsyncThunk('jobs/addAJob', async (jobData) => {
   const job = await addJobToDB(jobData);
   return job;
 });
 
+// update a job
+export const updateAJob = createAsyncThunk('jobs/updateAJob', async ({ id, jobData }) => {
+  const job = await updateJobToDB(id, jobData);
+  return job;
+});
+
+// delete a job
 export const removeAJob = createAsyncThunk('jobs/removeAJob', async (id) => {
   const job = await deleteJobFromDB(id);
   return job;
@@ -28,14 +36,9 @@ export const removeAJob = createAsyncThunk('jobs/removeAJob', async (id) => {
 const jobsSlice = createSlice({
   name: 'jobs',
   initialState,
-  // reducers: {
-  //   addJob: (state, action) => {
-  //     state.jobs.push(action.payload);
-  //   },
-  // },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchJobs.pending, (state, action) => {
+      .addCase(fetchJobs.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.error = '';
@@ -62,7 +65,7 @@ const jobsSlice = createSlice({
       .addCase(addAJob.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        state.jobs.push(action.payload.data);
+        state.jobs.push(action.payload);
       })
       .addCase(addAJob.rejected, (state, action) => {
         state.isLoading = false;
@@ -70,8 +73,27 @@ const jobsSlice = createSlice({
         state.error = action.error?.message;
       })
 
+      // update a job
+      .addCase(updateAJob.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = '';
+      })
+      .addCase(updateAJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        // update
+        const indexToUpdate = state.jobs.findIndex((job) => job.id === action.payload.id);
+        state.jobs[indexToUpdate] = action.payload;
+      })
+      .addCase(updateAJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.error = action.error?.message;
+      })
+
       // delete
-      .addCase(removeAJob.pending, (state, action) => {
+      .addCase(removeAJob.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.error = '';
@@ -92,4 +114,3 @@ const jobsSlice = createSlice({
 });
 
 export default jobsSlice.reducer;
-// export const { addJob } = jobsSlice.actions;

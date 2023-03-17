@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const [sort, setSort] = useState('');
+  const [search, setSearch] = useState('');
 
   const handleSort = (e) => {
     e.preventDefault();
@@ -14,8 +14,8 @@ export default function Header() {
   const handleSearch = (e) => {
     // e.preventDefault();
     if (e.key === 'Enter') {
-      console.log(sort);
-      dispatch(searchData(sort));
+      console.log(search);
+      dispatch(searchData(search));
     };
   }
 
@@ -25,7 +25,7 @@ export default function Header() {
       <div className="flex gap-4">
         <div className="search-field group flex-1">
           <i className="fa-solid fa-magnifying-glass search-icon group-focus-within:text-blue-500" />
-          <input onChange={(e) => setSort(e.target.value)} type="text" placeholder="Search Job" className="search-input" id="lws-searchJob" value={sort} onKeyUp={handleSearch} />
+          <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search Job" className="search-input" id="lws-searchJob" value={search} onKeyUp={handleSearch} />
         </div>
         <select onChange={handleSort} id="lws-sort" name="sort" autoComplete="sort" className="flex-1">
           <option value="">Default</option>

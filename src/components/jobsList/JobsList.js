@@ -14,7 +14,7 @@ export default function JobsList() {
     dispatch(fetchJobs())
   }, [dispatch]);
 
-  const filterByJobTitle = (job) => {
+  const filterByJobType = (job) => {
     // console.log(filterTitle)
     switch (filterTitle) {
       case 'internship':
@@ -77,7 +77,7 @@ export default function JobsList() {
   };
 
   if (!isLoading && !isError && jobs?.length > 0) {
-    content = jobs.filter(filterByJobTitle).filter(filterByTitle).sort(sortBySalaryRange).map((job) => <Job key={job.id} job={job} />)
+    content = jobs.filter(filterByJobType).filter(filterByTitle).sort(sortBySalaryRange).map((job) => <Job key={job.id} job={job} />)
   }
 
   return (

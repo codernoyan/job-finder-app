@@ -21,7 +21,7 @@ export default function Sidebar() {
   const handleNavigateToAddJob = () => {
     dispatch(emptyJob());
     navigate('/add-new-job');
-  }
+  };
 
   return (
     <div className="sidebar">

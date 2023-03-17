@@ -10,11 +10,6 @@ export default function Sidebar() {
   const handleFilter = (e, type) => {
     e.preventDefault();
     dispatch(filterData(type));
-  };
-
-  const handleFilterAll = (e, type) => {
-    e.preventDefault();
-    dispatch(filterData(type));
     navigate('/');
   };
 
@@ -28,7 +23,7 @@ export default function Sidebar() {
       <nav>
         <ul className="space-y-4">
           <li>
-            <Link to="/" onClick={(e) => handleFilterAll(e, '')} className="main-menu menu-active" id="lws-alljobs-menu">
+            <Link to="/" onClick={(e) => handleFilter(e, '')} className="main-menu menu-active" id="lws-alljobs-menu">
               <i className="fa-solid fa-briefcase" />
               <span> All Available Jobs</span>
             </Link>

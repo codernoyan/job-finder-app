@@ -69,13 +69,6 @@
       "salary": 75000,
       "deadline": "2023-03-31",
       "id": 11
-    },
-    {
-      "title": "DevOps Engineer",
-      "type": "Internship",
-      "salary": 65545,
-      "deadline": "2023-03-30",
-      "id": 12
     }
   ]
 }
